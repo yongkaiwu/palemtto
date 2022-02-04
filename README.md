@@ -26,10 +26,6 @@ $ qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge
 module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
 ~~~
 
->Attn: 
->  1. Check the available modules using `module avail`. 
->  2. cuda and cuDNN should be compatible with PyTorch installed later.
-
 3) Create a conda environment called `pytorch` (or any name you like):
 
 ~~~
@@ -63,9 +59,10 @@ Tesla P100-PCIE-12GB
 
 ## PyTorch in Terminal
 
-Each time you login, you will first need to load the required modules and also activate the `pytorch` conda environment before running Python:
+Each time you login, you will first need to request harware resources, load the required modules, and also activate the `pytorch` conda environment before running Python:
 
 ~~~
+$ qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
 $ module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
 $ source activate pytorch
 ~~~
