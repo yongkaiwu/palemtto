@@ -20,11 +20,34 @@ Server with PyTorch environment on
 $ qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
 ~~~
 
+Wait until the resources are successfully allocated:
+
+~~~
+qsub (Warning): Interactive jobs will be treated as not rerunnable
+qsub: waiting for job 4646626.pbs02 to start
+qsub: job 4646626.pbs02 ready
+~~~
+
 2) Load the Anaconda, cuda, cuDNN modules:
 
 ~~~
 module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
 ~~~
+
+Check whether the modules are succesffully loaded:
+
+~~~
+$ which python
+/software/spackages/linux-centos8-x86_64/gcc-8.3.1/anaconda3-2021.05-5tjen3mrle3pnguoedh4n2stzzsmywn7/bin/python
+$ nvcc --version
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2019 NVIDIA Corporation
+Built on Wed_Oct_23_19:24:38_PDT_2019
+Cuda compilation tools, release 10.2, V10.2.89
+~~~
+
+
+> To list the available modules, refer to [Modules at Palmetto](https://www.palmetto.clemson.edu/palmetto/software/software/#modules).
 
 3) Create a conda environment called `pytorch` (or any name you like):
 
