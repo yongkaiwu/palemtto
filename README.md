@@ -49,16 +49,16 @@ Cuda compilation tools, release 10.2, V10.2.89
 
 > To list the available modules, refer to [Modules at Palmetto](https://www.palmetto.clemson.edu/palmetto/software/software/#modules).
 
-3) Create a conda environment called `pytorch` (or any name you like):
+3) Create a conda environment called `pytorch8550` (or any name you like):
 
 ~~~
-$ conda create -n pytorch anaconda python=3.9
+$ conda create -n pytorch8550 anaconda python=3.9
 ~~~
 
 4) Activate the conda environment:
 
 ~~~
-$ source activate pytorch
+$ source activate pytorch8550
 ~~~
 
 5) Install Pytorch with GPU support from the pytorch channel:
@@ -82,12 +82,12 @@ Tesla P100-PCIE-12GB
 
 ## PyTorch in Terminal
 
-Each time you login, you will first need to request harware resources, load the required modules, and also activate the `pytorch` conda environment before running Python:
+Each time you login, you will first need to request harware resources, load the required modules, and also activate the `pytorch8550` conda environment before running Python:
 
 ~~~
 $ qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
 $ module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
-$ source activate pytorch
+$ source activate pytorch8550
 ~~~
 
 ## PyTorch on OpenOnDemand
@@ -99,7 +99,7 @@ If you want to write code using JupyterLab, the browser-based notebook is a bett
 - Make the following selections:
   - Anaconda Version: `anaconda3/2021.05-gcc/8.3.1`
   - List of modules to be loaded, separate by an empty space: `cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1`
-  - Path to Python virtual/conda environment: `source activate pytorch`
+  - Path to Python virtual/conda environment: `source activate pytorch8550`
 - Make the remaining selections according to how much resources you would need.
   - Number of resource chunks: `1`
   - CPU cores per chunk: `8`
