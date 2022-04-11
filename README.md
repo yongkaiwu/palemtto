@@ -17,7 +17,7 @@ Server with PyTorch environment on
 1) Request an interactive session on a GPU node.
 
 ~~~
-$ qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
+qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
 ~~~
 
 Wait until the resources are successfully allocated:
@@ -30,6 +30,13 @@ qsub: job 4646626.pbs02 ready
 
 2) Load the Anaconda, cuda, cuDNN modules:
 
+Ideally, there is no Python installed before loading.
+If you are not sure, check by
+
+~~~
+which python
+~~~
+
 ~~~
 module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
 ~~~
@@ -37,13 +44,9 @@ module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-
 Check whether the modules are succesffully loaded:
 
 ~~~
-$ which python
-/software/spackages/linux-centos8-x86_64/gcc-8.3.1/anaconda3-2021.05-5tjen3mrle3pnguoedh4n2stzzsmywn7/bin/python
-$ nvcc --version
-nvcc: NVIDIA (R) Cuda compiler driver
-Copyright (c) 2005-2019 NVIDIA Corporation
-Built on Wed_Oct_23_19:24:38_PDT_2019
-Cuda compilation tools, release 10.2, V10.2.89
+nvcc --version
+which python
+which conda
 ~~~
 
 
@@ -52,13 +55,13 @@ Cuda compilation tools, release 10.2, V10.2.89
 3) Create a conda environment called `pytorch8550` (or any name you like):
 
 ~~~
-$ conda create -n pytorch8550 anaconda python=3.9
+conda create -n pytorch8550 anaconda python=3.9
 ~~~
 
 4) Activate the conda environment:
 
 ~~~
-$ source activate pytorch8550
+source activate pytorch8550
 ~~~
 
 5) Install Pytorch with GPU support from the pytorch channel:
@@ -70,7 +73,7 @@ conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 6) You can now run Python and test the install:
 
 ~~~~
-$ python
+python
 >>> import torch
 >>> print(torch.cuda.is_available())
 True
@@ -85,9 +88,9 @@ Tesla P100-PCIE-12GB
 Each time you login, you will first need to request harware resources, load the required modules, and also activate the `pytorch8550` conda environment before running Python:
 
 ~~~
-$ qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
-$ module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
-$ source activate pytorch8550
+qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
+module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
+source activate pytorch8550
 ~~~
 
 ## PyTorch on OpenOnDemand
