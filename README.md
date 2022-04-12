@@ -17,7 +17,7 @@ Server with PyTorch environment on
 1) Request an interactive session on a GPU node.
 
 ~~~
-qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
+qsub -I -l select=1:ncpus=2:mem=2gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=1:00:00
 ~~~
 
 Wait until the resources are successfully allocated:
@@ -58,9 +58,10 @@ which conda
 conda create -n pytorch8550 anaconda python=3.9
 ~~~
 
-4) Activate the conda environment:
+4) Check and activate the conda environment:
 
 ~~~
+conda env list
 source activate pytorch8550
 ~~~
 
@@ -88,7 +89,7 @@ Tesla P100-PCIE-12GB
 Each time you login, you will first need to request harware resources, load the required modules, and also activate the `pytorch8550` conda environment before running Python:
 
 ~~~
-qsub -I -l select=1:ncpus=16:mem=20gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
+qsub -I -l select=1:ncpus=8:mem=10gb:ngpus=1:gpu_model=p100:interconnect=10ge,walltime=3:00:00
 module load anaconda3/2021.05-gcc/8.3.1 cudnn/7.6.5.32-10.2-linux-x64-gcc/8.3.1-cuda10_2 cuda/10.2.89-gcc/8.3.1
 source activate pytorch8550
 ~~~
